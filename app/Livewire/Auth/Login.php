@@ -25,6 +25,8 @@ class Login extends Component
 
     /**
      * Handle an incoming authentication request.
+     *
+     * @throws ValidationException
      */
     public function login(): void
     {

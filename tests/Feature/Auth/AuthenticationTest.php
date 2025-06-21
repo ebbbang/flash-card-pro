@@ -49,6 +49,27 @@ class AuthenticationTest extends TestCase
         $this->assertGuest();
     }
 
+    public function test_users_can_hit_rate_limit(): void
+    {
+        $user = User::factory()->create();
+
+        for ($i = 0; $i < 5; $i++) {
+            Livewire::test(Login::class)
+                ->set('email', $user->email)
+                ->set('password', 'wrong-password')
+                ->call('login');
+        }
+
+        $response = Livewire::test(Login::class)
+            ->set('email', $user->email)
+            ->set('password', 'password')
+            ->call('login');
+
+        $response->assertHasErrors('email');
+
+        $this->assertGuest();
+    }
+
     public function test_users_can_logout(): void
     {
         $user = User::factory()->create();
