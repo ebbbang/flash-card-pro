@@ -12,7 +12,9 @@ class ApiAccess extends Component
 
     public function render(): Renderable
     {
-        return view('livewire.settings.api-access');
+        return view('livewire.settings.api-access', [
+            'apiLogs' => Auth::user()->apiLogs()->latest()->paginate(2),
+        ]);
     }
 
     public function generateToken(): void

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Models;
 
+use App\Models\ApiLog;
 use App\Models\Deck;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -85,5 +86,13 @@ class UserTest extends TestCase
 
         $this->assertInstanceOf(HasMany::class, $user->decks());
         $this->assertInstanceOf(Deck::class, $user->decks()->getModel());
+    }
+
+    public function test_model_has_many_api_logs()
+    {
+        $user = new User;
+
+        $this->assertInstanceOf(HasMany::class, $user->apiLogs());
+        $this->assertInstanceOf(ApiLog::class, $user->apiLogs()->getModel());
     }
 }

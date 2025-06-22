@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Deck::class);
     }
+
+    public function apiLogs(): HasMany
+    {
+        return $this->hasMany(ApiLog::class);
+    }
 }

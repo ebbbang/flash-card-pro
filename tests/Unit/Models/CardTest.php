@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class CardTest extends TestCase
 {
-    public function test_model_extends_base_user()
+    public function test_model_extends_base_model()
     {
         $extends = get_parent_class(Card::class);
 

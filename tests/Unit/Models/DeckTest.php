@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class DeckTest extends TestCase
 {
-    public function test_model_extends_base_user()
+    public function test_model_extends_base_model()
     {
         $extends = get_parent_class(Deck::class);
 
