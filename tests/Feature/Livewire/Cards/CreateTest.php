@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Cards;
+namespace Tests\Feature\Livewire\Cards;
 
 use App\Livewire\Cards;
 use App\Models\Card;
@@ -36,7 +36,7 @@ class CreateTest extends TestCase
     {
         $this->actingAs($this->user);
 
-        $this->get("/decks/{$this->deck->id}/cards/create")->assertStatus(200);
+        $this->get("/decks/{$this->deck->id}/cards/create")->assertOk();
     }
 
     public function test_user_cannot_visit_other_users_create_screen(): void

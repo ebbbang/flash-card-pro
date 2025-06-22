@@ -34,7 +34,20 @@ class DeckTest extends TestCase
     {
         $fillable = (new Deck)->getFillable();
 
-        $this->assertSame(['name'], $fillable);
+        $this->assertSame(['name', 'is_public'], $fillable);
+    }
+
+    public function test_model_has_casts()
+    {
+        $casts = (new Deck)->getCasts();
+
+        $this->assertSame(
+            [
+                'id' => 'int',
+                'is_public' => 'boolean',
+            ],
+            $casts
+        );
     }
 
     public function test_model_belongs_to_user()

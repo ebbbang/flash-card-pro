@@ -10,6 +10,8 @@ class Create extends Component
 {
     public string $name = '';
 
+    public bool $is_public;
+
     protected function rules(): array
     {
         return [
@@ -18,6 +20,10 @@ class Create extends Component
                 'string',
                 'max:20',
                 Rule::unique('decks', 'name')->where('user_id', Auth::id()),
+            ],
+            'is_public' => [
+                'required',
+                'boolean',
             ],
         ];
     }

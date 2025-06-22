@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Decks;
+namespace Tests\Feature\Livewire\Decks;
 
 use App\Livewire\Decks;
 use App\Models\Deck;
@@ -32,7 +32,7 @@ class CreateTest extends TestCase
     {
         $this->actingAs($this->user);
 
-        $this->get('/decks/create')->assertStatus(200);
+        $this->get('/decks/create')->assertOk();
     }
 
     public function test_user_can_create_deck_with_valid_data(): void
@@ -40,6 +40,7 @@ class CreateTest extends TestCase
         Livewire::actingAs($this->user)
             ->test(Decks\Create::class)
             ->set('name', $name = Str::random())
+            ->set('is_public', $isPublic = mt_rand(0, 1))
             ->call('store')
             ->assertHasNoErrors()
             ->assertRedirect(route('decks.index', absolute: false));
@@ -47,6 +48,7 @@ class CreateTest extends TestCase
         $this->assertDatabaseHas('decks', [
             'user_id' => $this->user->id,
             'name' => $name,
+            'is_public' => $isPublic,
         ]);
     }
 
@@ -58,7 +60,10 @@ class CreateTest extends TestCase
         Livewire::actingAs($this->user)
             ->test(Decks\Create::class)
             ->call('store')
-            ->assertHasErrors(['name' => 'required']);
+            ->assertHasErrors([
+                'name' => 'required',
+                'is_public' => 'required',
+            ]);
 
         Livewire::actingAs($this->user)
             ->test(Decks\Create::class)

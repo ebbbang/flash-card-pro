@@ -9,7 +9,7 @@ class DeckPolicy
 {
     public function view(User $user, Deck $deck): bool
     {
-        return $user->id === $deck->user_id;
+        return $user->id === $deck->user_id || $deck->is_public;
     }
 
     public function create(User $user): bool

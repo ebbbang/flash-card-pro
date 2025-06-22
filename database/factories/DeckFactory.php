@@ -20,6 +20,7 @@ class DeckFactory extends Factory
         return [
             'user_id' => User::factory(),
             'name' => $this->faker->unique()->words(2, true),
+            'is_public' => $this->faker->boolean(10),
         ];
     }
 }

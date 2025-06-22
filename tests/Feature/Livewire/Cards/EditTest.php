@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Cards;
+namespace Tests\Feature\Livewire\Cards;
 
 use App\Livewire\Cards;
 use App\Models\Card;
@@ -39,7 +39,7 @@ class EditTest extends TestCase
     {
         $this->actingAs($this->user);
 
-        $this->get("/decks/{$this->deck->id}/cards/{$this->card->id}/edit")->assertStatus(200);
+        $this->get("/decks/{$this->deck->id}/cards/{$this->card->id}/edit")->assertOk();
     }
 
     public function test_user_cannot_visit_other_users_edit_screen(): void

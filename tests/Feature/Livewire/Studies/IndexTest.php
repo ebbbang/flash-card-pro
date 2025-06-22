@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Studies;
+namespace Tests\Feature\Livewire\Studies;
 
 use App\Livewire\Studies;
 use App\Models\Card;
@@ -39,14 +39,18 @@ class IndexTest extends TestCase
     {
         $this->actingAs($this->user);
 
-        $this->get("/decks/{$this->deck->id}/studies")->assertStatus(200);
+        $this->get("/decks/{$this->deck->id}/studies")->assertOk();
     }
 
-    public function test_user_cannot_visit_other_users_index_screen(): void
+    public function test_user_can_only_visit_public_deck_from_other_users(): void
     {
         $this->actingAs(User::factory()->create());
 
-        $this->get("/decks/{$this->deck->id}/studies")->assertStatus(403);
+        $deck = Deck::factory()->create(['is_public' => false]);
+        $this->get("/decks/{$deck->id}/studies")->assertStatus(403);
+
+        $deck = Deck::factory()->create(['is_public' => true]);
+        $this->get("/decks/{$deck->id}/studies")->assertOk();
     }
 
     public function test_user_can_see_cards(): void

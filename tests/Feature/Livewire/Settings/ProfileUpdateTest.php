@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Settings;
+namespace Tests\Feature\Livewire\Settings;
 
 use App\Livewire\Settings\Profile;
 use App\Models\User;

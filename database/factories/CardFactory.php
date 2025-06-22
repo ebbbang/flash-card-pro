@@ -19,7 +19,7 @@ class CardFactory extends Factory
     {
         return [
             'deck_id' => Deck::factory(),
-            'question' => $this->faker->unique()->words(mt_rand(1, 3), true).'?',
+            'question' => $this->faker->unique()->words(mt_rand(2, 4), true).'?',
             'answer' => $this->faker->words(mt_rand(1, 3), true),
         ];
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature\Livewire\Auth;
 
 use App\Livewire\Auth\ConfirmPassword;
 use App\Models\User;
@@ -18,7 +18,7 @@ class PasswordConfirmationTest extends TestCase
 
         $response = $this->actingAs($user)->get('/confirm-password');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_password_can_be_confirmed(): void

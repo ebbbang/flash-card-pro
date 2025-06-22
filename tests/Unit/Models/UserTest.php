@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -23,7 +24,7 @@ class UserTest extends TestCase
         $traits = class_uses(User::class);
 
         $this->assertSame(
-            [HasFactory::class, Notifiable::class],
+            [HasApiTokens::class, HasFactory::class, Notifiable::class],
             array_keys($traits)
         );
     }

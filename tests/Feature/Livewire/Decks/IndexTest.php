@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Decks;
+namespace Tests\Feature\Livewire\Decks;
 
 use App\Livewire\Decks;
 use App\Models\Card;
@@ -33,7 +33,7 @@ class IndexTest extends TestCase
     {
         $this->actingAs($this->user);
 
-        $this->get('/decks')->assertStatus(200);
+        $this->get('/decks')->assertOk();
     }
 
     public function test_user_can_see_their_decks(): void

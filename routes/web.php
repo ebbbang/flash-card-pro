@@ -2,6 +2,7 @@
 
 use App\Livewire\Cards;
 use App\Livewire\Decks;
+use App\Livewire\Settings\ApiAccess;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -24,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
+    Route::get('settings/api-access', ApiAccess::class)->name('settings.api-access');
 
     // Decks
     Route::get('/decks', Decks\Index::class)->name('decks.index');
@@ -39,7 +41,7 @@ Route::middleware(['auth'])->group(function () {
                 ->name('cards.index');
             Route::get('/cards/create', Cards\Create::class)
                 ->can('view', 'deck')
-                ->can('create', Card::class)
+                ->can('create', [Card::class, 'deck'])
                 ->name('cards.create');
             Route::get('/cards/{card}/edit', Cards\Edit::class)
                 ->can('view', 'deck')
