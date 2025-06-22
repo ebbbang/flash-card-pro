@@ -1,10 +1,10 @@
 <div>
     <div class="flex mb-6 justify-between">
         <flux:breadcrumbs>
-            <flux:breadcrumbs.item :href="route('dashboard')" wire:navigate>
+            <flux:breadcrumbs.item :href="route('dashboard')" wire:navigate class="hidden md:flex">
                 {{ __('Home') }}
             </flux:breadcrumbs.item>
-            <flux:breadcrumbs.item :href="route('decks.index')" wire:navigate>
+            <flux:breadcrumbs.item :href="route('decks.index')" wire:navigate class="hidden md:flex">
                 {{ __('My Decks') }}
             </flux:breadcrumbs.item>
             <flux:breadcrumbs.item :href="route('cards.index', $deck)" wire:navigate>
@@ -12,9 +12,16 @@
             </flux:breadcrumbs.item>
         </flux:breadcrumbs>
 
-        <flux:button icon="plus" variant="primary" :href="route('cards.create', $deck)" wire:navigate>
-            {{ __('Add Card') }}
-        </flux:button>
+        <div class="flex gap-2">
+            @if($cards->count())
+                <flux:button icon="academic-cap" variant="primary" :href="route('studies.index', $deck)" wire:navigate>
+                    {{ __('Study Deck') }}
+                </flux:button>
+            @endif
+            <flux:button icon="plus" variant="primary" :href="route('cards.create', $deck)" wire:navigate>
+                {{ __('Add Card') }}
+            </flux:button>
+        </div>
     </div>
 
     <flux:separator variant="subtle" class="mb-6"/>

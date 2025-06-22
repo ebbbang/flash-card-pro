@@ -1,26 +1,16 @@
 <div>
     <flux:breadcrumbs class="mb-6">
-        <flux:breadcrumbs.item :href="route('dashboard')" wire:navigate>
+        <flux:breadcrumbs.item :href="route('dashboard')" wire:navigate class="hidden md:flex">
             {{ __('Home') }}
         </flux:breadcrumbs.item>
-
-        <flux:breadcrumbs.item>
-            <flux:dropdown>
-                <flux:button icon="ellipsis-horizontal" variant="ghost" size="sm"/>
-
-                <flux:navmenu>
-                    <flux:navmenu.item :href="route('decks.index')" wire:navigate>
-                        {{ __('My Decks') }}
-                    </flux:navmenu.item>
-                    <flux:navmenu.item :href="route('cards.index', $deck)" wire:navigate icon="arrow-turn-down-right">
-                        {{ $deck->name }}
-                    </flux:navmenu.item>
-                </flux:navmenu>
-            </flux:dropdown>
+        <flux:breadcrumbs.item :href="route('decks.index')" wire:navigate class="hidden md:flex">
+            {{ __('My Decks') }}
         </flux:breadcrumbs.item>
-
+        <flux:breadcrumbs.item :href="route('cards.index', $deck)" wire:navigate class="hidden md:flex">
+            {{ $deck->name }}
+        </flux:breadcrumbs.item>
         <flux:breadcrumbs.item>
-            {{ __('Add Card') }}
+            {{ __('Add Deck') }}
         </flux:breadcrumbs.item>
     </flux:breadcrumbs>
 

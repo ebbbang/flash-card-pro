@@ -1,9 +1,9 @@
 <div>
     <flux:breadcrumbs class="mb-6">
-        <flux:breadcrumbs.item :href="route('dashboard')" wire:navigate>
+        <flux:breadcrumbs.item :href="route('dashboard')" wire:navigate class="hidden md:flex">
             {{ __('Home') }}
         </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item :href="route('decks.index')" wire:navigate>
+        <flux:breadcrumbs.item :href="route('decks.index')" wire:navigate class="hidden md:flex">
             {{ __('My Decks') }}
         </flux:breadcrumbs.item>
         <flux:breadcrumbs.item>

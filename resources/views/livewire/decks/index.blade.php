@@ -1,7 +1,7 @@
 <div>
     <div class="flex mb-6 justify-between">
         <flux:breadcrumbs>
-            <flux:breadcrumbs.item :href="route('dashboard')" wire:navigate>
+            <flux:breadcrumbs.item :href="route('dashboard')" wire:navigate class="hidden md:flex">
                 {{ __('Home') }}
             </flux:breadcrumbs.item>
             <flux:breadcrumbs.item>

@@ -5,6 +5,7 @@ use App\Livewire\Decks;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
+use App\Livewire\Studies;
 use App\Models\Card;
 use App\Models\Deck;
 use Illuminate\Support\Facades\Route;
@@ -30,9 +31,9 @@ Route::middleware(['auth'])->group(function () {
         ->can('create', Deck::class)
         ->name('decks.create');
 
-    // Cards
     Route::prefix('decks/{deck}')
         ->group(function () {
+            // Cards
             Route::get('/cards', Cards\Index::class)
                 ->can('view', 'deck')
                 ->name('cards.index');
@@ -44,6 +45,11 @@ Route::middleware(['auth'])->group(function () {
                 ->can('view', 'deck')
                 ->can('update', 'card')
                 ->name('cards.edit');
+
+            // Studies
+            Route::get('/studies', Studies\Index::class)
+                ->can('view', 'deck')
+                ->name('studies.index');
         });
 });
 
