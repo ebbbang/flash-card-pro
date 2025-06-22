@@ -3,6 +3,7 @@
 namespace Feature\Decks;
 
 use App\Livewire\Decks;
+use App\Models\Card;
 use App\Models\Deck;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -64,5 +65,15 @@ class IndexTest extends TestCase
             ->assertViewHas('decks', function (LengthAwarePaginator $decks) {
                 return $decks->count() === 0 && $decks->total() === 0;
             });
+    }
+
+    public function test_user_can_see_card_count_for_decks(): void
+    {
+        $deck = Deck::factory()->for($this->user)->create();
+        $cards = Card::factory()->for($deck)->count(mt_rand(1, 10))->create();
+
+        Livewire::actingAs($this->user)
+            ->test(Decks\Index::class)
+            ->assertSee("{$cards->count()} Cards");
     }
 }

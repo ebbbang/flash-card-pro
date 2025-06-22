@@ -14,7 +14,7 @@ class Index extends Component
     public function render(): Renderable
     {
         return view('livewire.decks.index', [
-            'decks' => Auth::user()->decks()->latest('id')->paginate(),
+            'decks' => Auth::user()->decks()->latest('id')->withCount('cards')->paginate(),
         ]);
     }
 }

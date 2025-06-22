@@ -20,13 +20,13 @@
         </flux:breadcrumbs.item>
 
         <flux:breadcrumbs.item>
-            {{ __('Add Card') }}
+            {{ __('Edit Card') }}
         </flux:breadcrumbs.item>
     </flux:breadcrumbs>
 
     <flux:separator variant="subtle"/>
 
-    <form wire:submit="store" class="my-6 max-w-md space-y-6">
+    <form wire:submit="update" class="my-6 max-w-md space-y-6">
         <flux:input
             wire:model="question"
             :label="__('Question')"
@@ -41,7 +41,7 @@
         <div class="flex items-center gap-4">
             <div class="flex items-center justify-end">
                 <flux:button icon="plus" variant="primary" type="submit" class="w-full">
-                    {{ __('Add Card') }}
+                    {{ __('Save Card') }}
                 </flux:button>
             </div>
         </div>

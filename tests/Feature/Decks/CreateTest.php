@@ -21,7 +21,6 @@ class CreateTest extends TestCase
         parent::setUp();
 
         $this->user = User::factory()->create();
-
     }
 
     public function test_guests_are_redirected_to_the_login_page(): void
@@ -36,7 +35,7 @@ class CreateTest extends TestCase
         $this->get('/decks/create')->assertStatus(200);
     }
 
-    public function test_user_can_create_decks_with_valid_data(): void
+    public function test_user_can_create_deck_with_valid_data(): void
     {
         Livewire::actingAs($this->user)
             ->test(Decks\Create::class)

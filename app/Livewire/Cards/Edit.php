@@ -2,21 +2,31 @@
 
 namespace App\Livewire\Cards;
 
+use App\Models\Card;
 use App\Models\Deck;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
-class Create extends Component
+class Edit extends Component
 {
     public Deck $deck;
+
+    public Card $card;
 
     public string $question = '';
 
     public string $answer = '';
 
-    public function mount(Deck $deck): void
+    public function mount(Deck $deck, Card $card): void
     {
+        if ($card->deck_id !== $deck->id) {
+            abort(404);
+        }
+
         $this->deck = $deck;
+        $this->card = $card;
+        $this->question = $card->question;
+        $this->answer = $card->answer;
     }
 
     protected function rules(): array
@@ -26,7 +36,7 @@ class Create extends Component
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('cards', 'question')->where('deck_id', $this->deck->id),
+                Rule::unique('cards', 'question')->where('deck_id', $this->deck->id)->ignore($this->card->id),
             ],
             'answer' => [
                 'required',
@@ -36,11 +46,11 @@ class Create extends Component
         ];
     }
 
-    public function store(): void
+    public function update(): void
     {
         $validated = $this->validate();
 
-        $this->deck->cards()->create($validated);
+        $this->card->update($validated);
 
         $this->redirect(route('cards.index', $this->deck, absolute: false), navigate: true);
     }

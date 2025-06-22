@@ -2,11 +2,13 @@
 
 namespace Tests\Unit\Models;
 
+use App\Models\Card;
 use App\Models\Deck;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tests\TestCase;
 
 class DeckTest extends TestCase
@@ -37,9 +39,17 @@ class DeckTest extends TestCase
 
     public function test_model_belongs_to_user()
     {
-        $user = new Deck;
+        $deck = new Deck;
 
-        $this->assertInstanceOf(BelongsTo::class, $user->user());
-        $this->assertInstanceOf(User::class, $user->user()->getModel());
+        $this->assertInstanceOf(BelongsTo::class, $deck->user());
+        $this->assertInstanceOf(User::class, $deck->user()->getModel());
+    }
+
+    public function test_model_has_many_cards()
+    {
+        $deck = new Deck;
+
+        $this->assertInstanceOf(HasMany::class, $deck->cards());
+        $this->assertInstanceOf(Card::class, $deck->cards()->getModel());
     }
 }

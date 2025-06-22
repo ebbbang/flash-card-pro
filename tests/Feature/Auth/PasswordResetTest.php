@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -74,6 +76,35 @@ class PasswordResetTest extends TestCase
             $response
                 ->assertHasNoErrors()
                 ->assertRedirect(route('login', absolute: false));
+
+            return true;
+        });
+    }
+
+    public function test_password_cannot_be_reset_with_invalid_details(): void
+    {
+        Notification::fake();
+
+        $user = User::factory()->create();
+
+        Livewire::test(ResetPassword::class, ['token' => Str::random()])
+            ->set('email', $user->email)
+            ->set('password', 'password')
+            ->set('password_confirmation', 'password')
+            ->call('resetPassword')
+            ->assertHasErrors(['email' => __(Password::INVALID_TOKEN)]);
+
+        Livewire::test(ForgotPassword::class)
+            ->set('email', $user->email)
+            ->call('sendPasswordResetLink');
+
+        Notification::assertSentTo($user, ResetPasswordNotification::class, function ($notification) {
+            Livewire::test(ResetPassword::class, ['token' => $notification->token])
+                ->set('email', 'invalid@example.com')
+                ->set('password', 'password')
+                ->set('password_confirmation', 'password')
+                ->call('resetPassword')
+                ->assertHasErrors(['email' => __(Password::INVALID_USER)]);
 
             return true;
         });

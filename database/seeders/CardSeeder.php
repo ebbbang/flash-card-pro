@@ -2,19 +2,19 @@
 
 namespace Database\Seeders;
 
+use App\Models\Card;
 use App\Models\Deck;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class DeckSeeder extends Seeder
+class CardSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        User::all()->each(function (User $user) {
-            Deck::factory()->for($user)->count(mt_rand(16, 20))->create();
+        Deck::all()->each(function (Deck $deck) {
+            Card::factory()->for($deck)->count(mt_rand(16, 20))->create();
         });
     }
 }
