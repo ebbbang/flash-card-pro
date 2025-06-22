@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Decks;
+namespace Tests\Feature\Decks;
 
 use App\Livewire\Decks;
 use App\Models\Card;

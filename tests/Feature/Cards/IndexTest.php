@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Cards;
+namespace Tests\Feature\Cards;
 
 use App\Livewire\Cards;
 use App\Models\Card;

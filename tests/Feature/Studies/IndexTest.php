@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Studies;
+namespace Tests\Feature\Studies;
 
 use App\Livewire\Studies;
 use App\Models\Card;
