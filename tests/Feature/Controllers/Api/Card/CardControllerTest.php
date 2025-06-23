@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Controllers\Api\Card;
+namespace Tests\Feature\Controllers\Api\Card;
 
 use App\Models\Card;
 use App\Models\Deck;

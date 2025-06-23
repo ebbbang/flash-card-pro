@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Livewire\Settings;
+namespace Tests\Feature\Livewire\Settings;
 
 use App\Livewire\Settings\ApiAccess;
 use App\Models\User;

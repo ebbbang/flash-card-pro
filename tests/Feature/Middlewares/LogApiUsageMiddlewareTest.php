@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Middlewares;
+namespace Tests\Feature\Middlewares;
 
 use App\Models\ApiLog;
 use App\Models\User;
